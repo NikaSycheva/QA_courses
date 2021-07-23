@@ -1,1 +1,1 @@
-# QA_courses
+# Tasks from the Vadim Ksendzov's qa course
