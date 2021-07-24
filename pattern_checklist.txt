@@ -1,0 +1,17 @@
+= Checklist =
+
+URl
+Build
+Environment
+Test date
+Tester
+Precondition
+
+
+id
+Title
+Test data
+Expected result
+Status (passed/failed/bloked/in progress/not run/skipped)
+Link to bugreport
+
