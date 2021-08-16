@@ -1,0 +1,56 @@
+Решенные задачи с https://sql-academy.org/
+
+Task 1
+SELECT name FROM Passenger
+
+Task 2
+SELECT name FROM Company
+
+Task 6
+SELECT DISTINCT name FROM Company
+JOIN Trip On Trip.company = Company.id
+WHERE plane = 'Boeing'
+
+Task 15
+SELECT time_in 
+FROM Trip
+JOIN Pass_in_trip ON Trip.id = Pass_in_trip.trip
+JOIN Passenger ON Pass_in_trip.passenger = Passenger.id
+WHERE Passenger.name = 'Steve Martin'
+AND Trip.town_to = 'London'
+
+Task 16
+SELECT Passenger.name, count(trip) as count
+FROM Passenger JOIN Pass_in_trip
+ON Passenger.id = Pass_in_trip.passenger
+GROUP BY Passenger.name
+HAVING count(trip) >= 1
+ORDER BY count DESC, Passenger.name
+
+или 
+
+SELECT Passenger.name, count(Pass_in_trip.id) as count 
+FROM Pass_in_trip
+JOIN Passenger ON Pass_in_trip.passenger = Passenger.id
+GROUP BY Passenger.name
+HAVING count >=1
+ORDER BY count DESC, name
+
+
+Task 32
+select floor (AVG(YEAR(CURRENT_DATE) - YEAR(birthday))) as age FROM FamilyMembers
+
+Task 38
+SELECT count(first_name) as count
+FROM Student
+WHERE first_name = 'Anna'
+
+Task 50
+select floor ((select count(id) from Student Where birthday BETWEEN '2000-01-01' AND '2000-12-31') * 100
+/ (select COUNT(id) from Student)) as percent
+
+Task 53
+UPDATE FamilyMembers
+SET member_name = 'Andie Anthony'
+WHERE member_name = 'Andie Quincey'
+

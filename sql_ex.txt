@@ -1,0 +1,183 @@
+Решенные задачи на https://sql-ex.ru/
+
+Task 1
+
+SELECT model, speed, hd
+FROM PC WHERE price <500
+
+Task 2
+
+SELECT DISTINCT maker FROM Product
+WHERE type = 'Printer'
+
+Task 3
+
+SELECT model, ram, screen
+FROM laptop
+WHERE price > 1000
+
+Task 4
+
+SELECT * FROM Printer
+WHERE color = 'y'
+
+Task 5
+
+SELECT model, speed, hd
+FROM PC
+WHERE cd IN ('12x', '24x')
+AND price < 600
+
+Task 6
+
+SELECT DISTINCT maker, speed
+FROM product AS p, laptop AS l
+WHERE l.model = p.model
+AND l.hd >= 10
+
+Task 7
+
+SELECT p.model, pc.price
+FROM product p
+JOIN PC
+ON p.model = pc.model
+WHERE p.maker = 'B'
+UNION
+SELECT p.model, l.price
+FROM product p
+JOIN laptop l
+ON p.model = l.model
+WHERE p.maker = 'B'
+UNION
+SELECT p.model, pr.price
+FROm product p
+JOIN printer pr
+ON p.model = pr.model
+WHERE p.maker = 'B'
+
+Task 8
+
+
+SELECT DISTINCT maker 
+FROM Product
+WHERE type = 'PC'
+AND maker NOT IN (select maker from product where type = 'laptop')
+
+Task 9
+
+SELECT DISTINCT maker
+FROM product p
+JOIN PC
+ON p.model = pc.model
+WHERE pc.speed >= 450
+
+Task 10
+
+SELECT printer.model, printer.price 
+FROM printer
+WHERE price = (SELECT MAX(price) from printer)
+
+Task 11
+
+SELECT AVG(speed) from PC
+
+Task 12
+
+SELECT  AVG(speed)  
+FROM laptop l
+WHERE l.price > 1000
+
+Task 13
+
+SELECT AVG(pc.speed)
+FROM PC
+JOIN product p
+ON p.model=pc.model
+WHERE p.maker = 'A'
+
+Task 14
+
+SELECT s.class, s.name, c.country
+FROM ships s
+JOIN Classes c
+ON c.class = s.class
+WHERE c.numGuns >=10
+
+Task 15
+
+SELECT hd FROM PC
+GROUP BY hd
+HAVING count(hd) >=2
+
+Task 19
+
+SELECT p.maker, AVG(l.screen)
+from product p
+join laptop l
+ON p.model=l.model
+WHERE l.model IS NOT NULL
+GROUP BY maker
+
+Task 20
+
+SELECT p.maker, count(p.model) as count_model
+FROM product p
+WHERE type = 'PC'
+GROUP BY p.maker
+HAVING count(p.model) >= 3
+
+Task 21
+
+SELECT p.maker, MAX(pc.price) as max_price
+FROM product p
+JOIN PC
+ON p.model = pc.model
+WHERE pc.model IS NOT NULL
+GROUP BY p.maker
+
+Task 22
+
+SELECT pc.speed, AVG(pc.price) as medium_price
+FROM pc
+WHERE pc.speed > 600
+GROUP by pc.speed
+
+Task 23
+
+SELECT p.maker 
+FROM product p
+JOIN pc 
+ON pc.model = p.model
+WHERE pc.speed >= 750
+INTERSECT
+SELECT p.maker
+FROM product p
+JOIN laptop l
+ON l.model = p.model
+WHERE l.speed >= 750
+
+
+Task 31
+SELECT class, country
+FROM Classes
+WHERE bore >= 16
+
+
+= Task 33
+SELECT Outcomes.ship
+FROM Outcomes
+jOIN Battles
+ON Outcomes.battle = Battles.name
+WHERE Battles.name = 'North Atlantic'
+AND Outcomes.result = 'sunk'
+
+= Task 38
+SELECT DISTINCT country
+FROM Classes
+WHERE type = 'bb'
+INTERSECT
+SELECT DISTINCT country
+FROM Classes
+WHERE type = 'bc'
+
+
